@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ndiugeulma - Fruits et Légumes Frais</title>
+    <title>Ndougeulma - Fruits et Légumes Frais</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -542,7 +542,6 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .contact-container {
                 grid-template-columns: 1fr;
@@ -560,6 +559,209 @@
 
             .contact-info h3 {
                 font-size: 1.7rem;
+            }
+        }
+
+        /* Chat WhatsApp Flottant */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+            color: white;
+        }
+
+        .whatsapp-float:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.3);
+            animation: whatsapp-pulse 2s infinite;
+        }
+
+        .whatsapp-popup {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .whatsapp-popup.show {
+            transform: scale(1);
+        }
+
+        .whatsapp-header {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .whatsapp-avatar {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .whatsapp-status {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-left: auto;
+            animation: blink 1.5s infinite;
+        }
+
+        .whatsapp-body {
+            padding: 1.5rem;
+        }
+
+        .whatsapp-message {
+            background: #f0f0f0;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .whatsapp-message:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 8px 8px 0;
+            border-color: transparent #f0f0f0 transparent transparent;
+        }
+
+        .whatsapp-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid #25d366;
+            color: #25d366;
+            padding: 0.8rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .whatsapp-btn:hover {
+            background: #25d366;
+            color: white;
+        }
+
+        .whatsapp-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes whatsapp-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Responsive pour mobile */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 30px;
+                right: 30px;
+                font-size: 26px;
+            }
+
+            .whatsapp-popup {
+                width: calc(100vw - 60px);
+                right: 30px;
+                bottom: 100px;
             }
         }
 
@@ -688,7 +890,7 @@
         <div class="container">
             <a class="navbar-brand" href="#accueil">
                 <div class="logo-icon">🥕</div>
-                Ndiugeulma
+                Ndougeulma
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -725,7 +927,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="accueil">
-        <h1>Ndiugeulma</h1>
+        <h1>Ndougeulma</h1>
         <p>Bienvenue dans votre épicerie de fruits et légumes frais ! Découvrez nos produits de qualité, directement de nos producteurs locaux à votre table.</p>
     </section>
 
@@ -759,7 +961,7 @@
                         <div class="icon">📍</div>
                         <div>
                             <strong>Localisation</strong><br>
-                            Dakar, Sénégal
+                            Saint-Louis, Sénégal
                         </div>
                     </li>
                     <li>
@@ -773,7 +975,7 @@
                         <div class="icon">🚚</div>
                         <div>
                             <strong>Livraison</strong><br>
-                            Rapide dans tout Dakar
+                            Rapide dans tout Saint-Louis
                         </div>
                     </li>
                 </ul>
@@ -845,13 +1047,55 @@
     <!-- Notification -->
     <div id="notification" class="notification"></div>
 
+    <!-- Chat WhatsApp Flottant -->
+    <div id="whatsapp-popup" class="whatsapp-popup">
+        <div class="whatsapp-header">
+            <div class="whatsapp-avatar">🥕</div>
+            <div class="whatsapp-info">
+                <h4>Ndougeulma</h4>
+                <p>En ligne maintenant</p>
+            </div>
+            <div class="whatsapp-status"></div>
+            <button class="whatsapp-close" onclick="toggleWhatsAppPopup()">×</button>
+        </div>
+        <div class="whatsapp-body">
+            <div class="whatsapp-message">
+                Salut ! 👋<br>
+                Comment puis-je vous aider aujourd'hui ?<br>
+                Nos fruits et légumes frais vous attendent ! 🥕🍌
+            </div>
+            <div class="whatsapp-buttons">
+                <a href="https://wa.me/221773525382?text=Bonjour ! Je souhaite voir vos produits disponibles aujourd'hui" class="whatsapp-btn" target="_blank">
+                    🛒 Voir les produits
+                </a>
+                <a href="https://wa.me/221773525382?text=Bonjour ! J'aimerais passer une commande" class="whatsapp-btn" target="_blank">
+                    📱 Passer commande
+                </a>
+                <a href="https://wa.me/221773525382?text=Bonjour ! J'ai une question sur la livraison" class="whatsapp-btn" target="_blank">
+                    🚚 Info livraison
+                </a>
+                <a href="https://wa.me/221773525382?text=Bonjour ! Je voudrais des informations sur vos prix" class="whatsapp-btn" target="_blank">
+                    💰 Demander prix
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/221773525382?text=Bonjour ! Je visite votre site Ndougeulma 🥕" 
+       class="whatsapp-float" 
+       target="_blank" 
+       onclick="return false;"
+       id="whatsapp-float">
+        📱
+    </a>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-section">
                 <div class="footer-logo">
                     <div class="footer-logo-icon">🥕</div>
-                    <h3>Ndiugeulma</h3>
+                    <h3>Ndougeulma</h3>
                 </div>
                 <p>Votre épicerie de confiance pour des fruits et légumes frais, cultivés avec amour et livrés avec soin. Qualité garantie depuis 2024.</p>
                 <div class="social-links">
@@ -875,7 +1119,7 @@
             <div class="footer-section">
                 <h3>Livraison</h3>
                 <ul>
-                    <li>Livraison rapide Dakar</li>
+                    <li>Livraison rapide Saint-Louis</li>
                     <li>Commande via WhatsApp</li>
                     <li>Paiement à la livraison</li>
                     <li>Fraîcheur garantie</li>
@@ -886,14 +1130,14 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📱 WhatsApp: +221 77 352 5382</p>
-                <p>📍 Dakar, Sénégal</p>
+                <p>📍 Saint-Louis, Sénégal</p>
                 <p>🕐 Lun-Dim: 7h - 20h</p>
                 <p>✉️ contact@ndiugeulma.sn</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Ndiugeulma - Tous droits réservés | Des produits frais pour une vie saine 🌱</p>
+            <p>&copy; 2025 Ndougeulma - Tous droits réservés | Des produits frais pour une vie saine 🌱</p>
         </div>
     </footer>
 
@@ -1191,7 +1435,7 @@
             }
             
             // Construction du message WhatsApp
-            let whatsappMessage = `🌟 *NOUVEAU MESSAGE - NDIUGEULMA* 🌟\n\n`;
+            let whatsappMessage = `🌟 *NOUVEAU MESSAGE - NDOUGEULMA* 🌟\n\n`;
             whatsappMessage += `👤 *Nom:* ${nom}\n`;
             whatsappMessage += `📱 *Téléphone:* ${telephone}\n`;
             
@@ -1222,6 +1466,58 @@
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.background = 'linear-gradient(45deg, #25d366, #128c7e)';
             }, 3000);
+        });
+
+        // Gestion du chat WhatsApp flottant
+        let whatsappPopupVisible = false;
+
+        function toggleWhatsAppPopup() {
+            const popup = document.getElementById('whatsapp-popup');
+            whatsappPopupVisible = !whatsappPopupVisible;
+            
+            if (whatsappPopupVisible) {
+                popup.classList.add('show');
+            } else {
+                popup.classList.remove('show');
+            }
+        }
+
+        // Gestion du bouton flottant WhatsApp
+        document.getElementById('whatsapp-float').addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleWhatsAppPopup();
+        });
+
+        // Fermer le popup en cliquant à l'extérieur
+        document.addEventListener('click', function(e) {
+            const popup = document.getElementById('whatsapp-popup');
+            const floatBtn = document.getElementById('whatsapp-float');
+            
+            if (!popup.contains(e.target) && !floatBtn.contains(e.target)) {
+                if (whatsappPopupVisible) {
+                    toggleWhatsAppPopup();
+                }
+            }
+        });
+
+        // Animation d'apparition du chat flottant après chargement de la page
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const floatBtn = document.getElementById('whatsapp-float');
+                floatBtn.style.opacity = '0';
+                floatBtn.style.transform = 'scale(0)';
+                floatBtn.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    floatBtn.style.opacity = '1';
+                    floatBtn.style.transform = 'scale(1)';
+                }, 100);
+                
+                // Notification d'accueil après 3 secondes
+                setTimeout(() => {
+                    showNotification('💬 Besoin d\'aide ? Cliquez sur le bouton WhatsApp !');
+                }, 3000);
+            }, 1000);
         });
 
         // Fonction pour mettre à jour l'affichage du panier
