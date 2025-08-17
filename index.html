@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ndougeulma - Fruits et Légumes Frais</title>
+    <title>Ndiugeulma - Fruits et Légumes Frais</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -664,15 +668,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -688,29 +683,49 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
+    <!-- Navigation Bootstrap -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#accueil">
                 <div class="logo-icon">🥕</div>
-                Ndougeulma
-            </div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#fruits">Fruits</a></li>
-                <li><a href="#legumes">Légumes</a></li>
-                <li><a href="#bio">Bio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="cart-info" onclick="toggleCart()">
-                Panier: <span id="cart-count">0</span> articles
+                Ndiugeulma
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="bi bi-list"></i>
+                </span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#produits">Fruits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#produits">Légumes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#produits">Bio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <button class="cart-info" onclick="toggleCart()">
+                    <i class="bi bi-cart3"></i> Panier: <span id="cart-count">0</span> articles
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="accueil">
-        <h1>Ndougeulma</h1>
+        <h1>Ndiugeulma</h1>
         <p>Bienvenue dans votre épicerie de fruits et légumes frais ! Découvrez nos produits de qualité, directement de nos producteurs locaux à votre table.</p>
     </section>
 
@@ -744,7 +759,7 @@
                         <div class="icon">📍</div>
                         <div>
                             <strong>Localisation</strong><br>
-                            St-Louis, Sénégal
+                            Dakar, Sénégal
                         </div>
                     </li>
                     <li>
@@ -836,9 +851,9 @@
             <div class="footer-section">
                 <div class="footer-logo">
                     <div class="footer-logo-icon">🥕</div>
-                    <h3>Ndougeulma</h3>
+                    <h3>Ndiugeulma</h3>
                 </div>
-                <p>Votre épicerie de confiance pour des fruits et légumes frais, cultivés avec amour et livrés avec soin. Qualité garantie depuis 2025.</p>
+                <p>Votre épicerie de confiance pour des fruits et légumes frais, cultivés avec amour et livrés avec soin. Qualité garantie depuis 2024.</p>
                 <div class="social-links">
                     <a href="https://wa.me/221773525382" class="social-link">📱</a>
                     <a href="#" class="social-link">📧</a>
@@ -871,14 +886,14 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📱 WhatsApp: +221 77 352 5382</p>
-                <p>📍 st-louis, Sénégal</p>
+                <p>📍 Dakar, Sénégal</p>
                 <p>🕐 Lun-Dim: 7h - 20h</p>
-                <p>✉️ contact@ndougeulma.sn</p>
+                <p>✉️ contact@ndiugeulma.sn</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Ndougeulma - Tous droits réservés | Des produits frais pour une vie saine 🌱</p>
+            <p>&copy; 2024 Ndiugeulma - Tous droits réservés | Des produits frais pour une vie saine 🌱</p>
         </div>
     </footer>
 
@@ -1277,5 +1292,8 @@
             });
         }, 100);
     </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
