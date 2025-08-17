@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndougeulma - Fruits et Légumes Frais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-info {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Products Section */
+        .products {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #e74c3c;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-cart:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: #27ae60;
+            font-size: 0.9rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .quantity-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .quantity-btn:hover {
+            background: #2980b9;
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cart-total {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #ecf0f1;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .cart-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-checkout {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            flex: 1;
+        }
+
+        .btn-clear {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            flex: 1;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 2rem 0;
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            transform: translateX(350px);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .footer-section p, .footer-section li {
+            margin-bottom: 0.5rem;
+            color: #bdc3c7;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li:before {
+            content: "🥬 ";
+            margin-right: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .contact-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-details li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .contact-details .icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background: rgba(52, 152, 219, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .contact-form h4 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(45deg, #128c7e, #075e54);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+
+            .contact-info {
+                padding-right: 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info h3 {
+                font-size: 1.7rem;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .btn-cart {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-cart:hover {
+            background: linear-gradient(45deg, #2980b9, #1abc9c);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(45deg, #128c7e, #075e54);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .product-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">🥕</div>
+                Ndougeulma
+            </div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#fruits">Fruits</a></li>
+                <li><a href="#legumes">Légumes</a></li>
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-info" onclick="toggleCart()">
+                Panier: <span id="cart-count">0</span> articles
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <h1>Ndougeulma</h1>
+        <p>Bienvenue dans votre épicerie de fruits et légumes frais ! Découvrez nos produits de qualité, directement de nos producteurs locaux à votre table.</p>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="produits">
+        <h2 class="section-title">Nos Produits Frais</h2>
+        
+        <div class="product-grid" id="product-grid">
+            <!-- Les produits seront générés par JavaScript -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">📞 Contactez-nous</h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>💬 Parlons Ensemble</h3>
+                <p>Vous avez des questions sur nos produits ? Besoin d'informations sur la livraison ? Ou simplement envie de passer commande ? Remplissez le formulaire et nous vous répondrons directement sur WhatsApp !</p>
+                
+                <ul class="contact-details">
+                    <li>
+                        <div class="icon">📱</div>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            +221 77 352 5382
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">📍</div>
+                        <div>
+                            <strong>Localisation</strong><br>
+                            St-Louis, Sénégal
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">🕐</div>
+                        <div>
+                            <strong>Horaires</strong><br>
+                            Lun-Dim: 7h00 - 20h00
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">🚚</div>
+                        <div>
+                            <strong>Livraison</strong><br>
+                            Rapide dans tout Dakar
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact-form">
+                <h4>✉️ Envoyez-nous un message</h4>
+                <form id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone *</label>
+                            <input type="tel" id="telephone" name="telephone" required placeholder="+221...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email (optionnel)</label>
+                        <input type="email" id="email" name="email" placeholder="votre@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sujet">Sujet de votre message *</label>
+                        <select id="sujet" name="sujet" required>
+                            <option value="">Sélectionnez un sujet...</option>
+                            <option value="Commande">🛒 Passer une commande</option>
+                            <option value="Livraison">🚚 Questions sur la livraison</option>
+                            <option value="Produits">🥕 Informations sur les produits</option>
+                            <option value="Prix">💰 Demande de prix</option>
+                            <option value="Grossiste">📦 Commande en gros</option>
+                            <option value="Autre">💬 Autre question</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Votre message *</label>
+                        <textarea id="message" name="message" required placeholder="Décrivez votre demande en détail..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        📱 Envoyer sur WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3 class="cart-title">🛒 Mon Panier</h3>
+                <button class="close-cart" onclick="toggleCart()">✕</button>
+            </div>
+            <div id="cart-items">
+                <!-- Les articles du panier seront affichés ici -->
+            </div>
+            <div id="cart-total" class="cart-total"></div>
+            <div class="cart-actions">
+                <button class="btn btn-clear" onclick="clearCart()">🗑️ Vider</button>
+                <button class="btn btn-checkout" onclick="checkoutWhatsApp()">📱 Commander</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">🥕</div>
+                    <h3>Ndougeulma</h3>
+                </div>
+                <p>Votre épicerie de confiance pour des fruits et légumes frais, cultivés avec amour et livrés avec soin. Qualité garantie depuis 2025.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/221773525382" class="social-link">📱</a>
+                    <a href="#" class="social-link">📧</a>
+                    <a href="#" class="social-link">📍</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Nos Produits</h3>
+                <ul>
+                    <li>Fruits frais de saison</li>
+                    <li>Légumes cultivés localement</li>
+                    <li>Produits biologiques</li>
+                    <li>Herbes aromatiques</li>
+                    <li>Épices naturelles</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Livraison</h3>
+                <ul>
+                    <li>Livraison rapide Dakar</li>
+                    <li>Commande via WhatsApp</li>
+                    <li>Paiement à la livraison</li>
+                    <li>Fraîcheur garantie</li>
+                    <li>Service 7j/7</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📱 WhatsApp: +221 77 352 5382</p>
+                <p>📍 st-louis, Sénégal</p>
+                <p>🕐 Lun-Dim: 7h - 20h</p>
+                <p>✉️ contact@ndougeulma.sn</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ndougeulma - Tous droits réservés | Des produits frais pour une vie saine 🌱</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données des produits (étendues)
+        const products = [
+            {
+                id: 1,
+                name: "Tomates Fraîches",
+                description: "Tomates juteuses et savoureuses, parfaites pour vos salades et plats cuisinés.",
+                price: "2500 FCFA/kg",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23ff6b6b'/%3E%3Ccircle cx='150' cy='125' r='80' fill='%23e74c3c'/%3E%3Ccircle cx='130' cy='100' r='15' fill='%23c0392b'/%3E%3Cpath d='M120 80 Q150 60 180 80' stroke='%2327ae60' stroke-width='4' fill='none'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3ETomates%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 2,
+                name: "Bananes Douces",
+                description: "Bananes mûres à point, riches en potassium et parfaites pour tous vos desserts.",
+                price: "1500 FCFA/kg",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23f1c40f'/%3E%3Cpath d='M80 180 Q150 120 220 180' stroke='%23f39c12' stroke-width='20' fill='none'/%3E%3Cpath d='M90 160 Q150 100 210 160' stroke='%23f39c12' stroke-width='18' fill='none'/%3E%3Cpath d='M100 140 Q150 80 200 140' stroke='%23f39c12' stroke-width='16' fill='none'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='%23d68910' font-size='16' font-weight='bold'%3EBananes%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 3,
+                name: "Carottes Croquantes",
+                description: "Carottes fraîches et croquantes, parfaites crues ou cuites, riches en vitamines.",
+                price: "1800 FCFA/kg",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23e67e22'/%3E%3Cpath d='M150 60 L160 200 L140 200 Z' fill='%23d35400'/%3E%3Cpath d='M140 50 Q150 40 160 50 L160 70 L140 70 Z' fill='%2327ae60'/%3E%3Ctext x='150' y='230' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3ECarottes%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 4,
+                name: "Mangues Juteuses",
+                description: "Mangues tropicales sucrées et parfumées, un délice pour vos papilles.",
+                price: "3000 FCFA/kg",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23f39c12'/%3E%3Cellipse cx='150' cy='125' rx='70' ry='90' fill='%23e67e22'/%3E%3Cpath d='M120 60 Q140 50 150 70' stroke='%2327ae60' stroke-width='6' fill='none'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EMangues%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 5,
+                name: "Salade Verte",
+                description: "Salade fraîche et croquante, idéale pour des repas légers et sains.",
+                price: "1200 FCFA/pièce",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%2327ae60'/%3E%3Ccircle cx='150' cy='125' r='80' fill='%232ecc71'/%3E%3Cpath d='M100 100 Q150 80 200 100 Q180 130 150 125 Q120 130 100 100' fill='%231e8449'/%3E%3Cpath d='M110 140 Q150 120 190 140 Q170 170 150 165 Q130 170 110 140' fill='%231e8449'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3ESalade%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 6,
+                name: "Oranges Vitaminées",
+                description: "Oranges juteuses gorgées de vitamine C, parfaites pour vos jus matinaux.",
+                price: "2200 FCFA/kg",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23f39c12'/%3E%3Ccircle cx='150' cy='125' r='75' fill='%23e67e22'/%3E%3Ccircle cx='130' cy='110' r='3' fill='%23d35400'/%3E%3Ccircle cx='170' cy='120' r='3' fill='%23d35400'/%3E%3Ccircle cx='150' cy='145' r='3' fill='%23d35400'/%3E%3Cpath d='M140 80 Q150 70 160 80' stroke='%2327ae60' stroke-width='4' fill='none'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EOranges%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 7,
+                name: "Pommes de Terre",
+                description: "Pommes de terre fermes et savoureuses, parfaites pour tous vos plats traditionnels.",
+                price: "1400 FCFA/kg",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23d4ac0d'/%3E%3Cellipse cx='150' cy='125' rx='85' ry='65' fill='%23b7950b'/%3E%3Ccircle cx='130' cy='110' r='4' fill='%23935116'/%3E%3Ccircle cx='170' cy='130' r='3' fill='%23935116'/%3E%3Ccircle cx='160' cy='150' r='2' fill='%23935116'/%3E%3Ctext x='150' y='210' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3EPommes de terre%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 8,
+                name: "Ananas Tropical",
+                description: "Ananas sucré et juteux, source de vitamines et d'enzymes bénéfiques.",
+                price: "4000 FCFA/pièce",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23f4d03f'/%3E%3Cellipse cx='150' cy='140' rx='60' ry='80' fill='%23f39c12'/%3E%3Cpath d='M120 60 L130 50 L140 65 L150 45 L160 65 L170 50 L180 60' stroke='%2327ae60' stroke-width='6' fill='none'/%3E%3Cpath d='M130 140 L170 140 M130 160 L170 160 M130 180 L170 180' stroke='%23d68910' stroke-width='2'/%3E%3Ctext x='150' y='230' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EAnanas%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 9,
+                name: "Oignons Rouges",
+                description: "Oignons rouges parfumés, indispensables pour rehausser vos plats.",
+                price: "1600 FCFA/kg",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%23a569bd'/%3E%3Ccircle cx='150' cy='135' r='70' fill='%23884ea0'/%3E%3Ccircle cx='150' cy='135' r='50' fill='%23633974'/%3E%3Cpath d='M140 80 Q150 70 160 80 L160 90 L140 90 Z' fill='%2327ae60'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EOignons%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 10,
+                name: "Pastèques Rafraîchissantes",
+                description: "Pastèques juteuses et désaltérantes, parfaites pour les chaudes journées.",
+                price: "2800 FCFA/kg",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%232ecc71'/%3E%3Cellipse cx='150' cy='125' rx='90' ry='70' fill='%231e8449'/%3E%3Cpath d='M80 125 Q150 180 220 125' fill='%23e74c3c'/%3E%3Ccircle cx='120' cy='140' r='3' fill='%23000'/%3E%3Ccircle cx='180' cy='140' r='3' fill='%23000'/%3E%3Ccircle cx='150' cy='160' r='3' fill='%23000'/%3E%3Ctext x='150' y='210' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EPastèques%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 11,
+                name: "Épinards Frais",
+                description: "Épinards riches en fer et en vitamines, excellents pour votre santé.",
+                price: "2000 FCFA/kg",
+                category: "légumes",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%2327ae60'/%3E%3Cpath d='M100 120 Q130 90 150 120 Q170 90 200 120 Q180 150 150 130 Q120 150 100 120' fill='%231e8449'/%3E%3Cpath d='M110 150 Q130 130 150 150 Q170 130 190 150 Q170 180 150 160 Q130 180 110 150' fill='%2317a2b8'/%3E%3Cpath d='M120 100 Q140 80 150 100 Q160 80 180 100' stroke='%2327ae60' stroke-width='3' fill='none'/%3E%3Ctext x='150' y='220' text-anchor='middle' fill='white' font-size='16' font-weight='bold'%3EÉpinards%3C/text%3E%3C/svg%3E"
+            },
+            {
+                id: 12,
+                name: "Citrons Verts",
+                description: "Citrons verts acidulés, parfaits pour assaisonner et parfumer vos plats.",
+                price: "3500 FCFA/kg",
+                category: "fruits",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='250' viewBox='0 0 300 250'%3E%3Crect width='300' height='250' fill='%2327ae60'/%3E%3Ccircle cx='150' cy='125' r='65' fill='%232ecc71'/%3E%3Cpath d='M130 100 Q150 85 170 100 Q160 115 150 110 Q140 115 130 100' fill='%231e8449'/%3E%3Ccircle cx='140' cy='120' r='2' fill='%23f1c40f'/%3E%3Ccircle cx='165' cy='135' r='2' fill='%23f1c40f'/%3E%3Ctext x='150' y='210' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3ECitrons verts%3C/text%3E%3C/svg%3E"
+            }
+        ];
+
+        let cart = [];
+
+        // Fonction pour générer les cartes de produits
+        function generateProductCards() {
+            const productGrid = document.getElementById('product-grid');
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <p class="product-price">${product.price}</p>
+                        <div class="product-buttons">
+                            <button class="btn btn-cart" onclick="addToCart(${product.id})">
+                                🛒 Ajouter au panier
+                            </button>
+                            <a href="https://wa.me/221773525382?text=Bonjour! Je suis intéressé(e) par ${encodeURIComponent(product.name)} à ${encodeURIComponent(product.price)}" 
+                               class="btn btn-whatsapp" target="_blank">
+                                📱 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        // Fonction pour ajouter au panier
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                
+                updateCartDisplay();
+                showNotification(`${product.name} ajouté au panier !`);
+                
+                // Animation de feedback sur le bouton
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Ajouté!';
+                button.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                }, 1500);
+            }
+        }
+
+        // Fonction pour afficher/masquer le panier
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const isVisible = modal.style.display === 'block';
+            
+            if (isVisible) {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+                renderCartItems();
+            }
+        }
+
+        // Fonction pour afficher les articles du panier
+        function renderCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart">Votre panier est vide</div>';
+                cartTotalContainer.innerHTML = '';
+                return;
+            }
+            
+            let total = 0;
+            cartItemsContainer.innerHTML = cart.map(item => {
+                const price = parseFloat(item.price.match(/\d+/)[0]);
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price}</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="quantity-btn" onclick="removeFromCart(${item.id})" style="background: #e74c3c; margin-left: 10px;">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotalContainer.innerHTML = `Total: ${total.toLocaleString()} FCFA`;
+        }
+
+        // Fonction pour mettre à jour la quantité
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartDisplay();
+                    renderCartItems();
+                }
+            }
+        }
+
+        // Fonction pour supprimer un article du panier
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+            renderCartItems();
+            showNotification('Article supprimé du panier');
+        }
+
+        // Fonction pour vider le panier
+        function clearCart() {
+            if (cart.length > 0) {
+                cart = [];
+                updateCartDisplay();
+                renderCartItems();
+                showNotification('Panier vidé');
+            }
+        }
+
+        // Fonction pour commander via WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showNotification('Votre panier est vide !');
+                return;
+            }
+            
+            let message = "Bonjour ! Je souhaite commander :\n\n";
+            let total = 0;
+            
+            cart.forEach(item => {
+                const price = parseFloat(item.price.match(/\d+/)[0]);
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+                message += `• ${item.name} x${item.quantity} = ${itemTotal.toLocaleString()} FCFA\n`;
+            });
+            
+            message += `\nTotal: ${total.toLocaleString()} FCFA\n\nMerci !`;
+            
+            const whatsappUrl = `https://wa.me/221773525382?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Fonction pour afficher les notifications
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Gestion du formulaire de contact
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des données du formulaire
+            const nom = document.getElementById('nom').value;
+            const telephone = document.getElementById('telephone').value;
+            const email = document.getElementById('email').value;
+            const sujet = document.getElementById('sujet').value;
+            const message = document.getElementById('message').value;
+            
+            // Validation
+            if (!nom || !telephone || !sujet || !message) {
+                showNotification('Veuillez remplir tous les champs obligatoires !');
+                return;
+            }
+            
+            // Construction du message WhatsApp
+            let whatsappMessage = `🌟 *NOUVEAU MESSAGE - NDIUGEULMA* 🌟\n\n`;
+            whatsappMessage += `👤 *Nom:* ${nom}\n`;
+            whatsappMessage += `📱 *Téléphone:* ${telephone}\n`;
+            
+            if (email) {
+                whatsappMessage += `✉️ *Email:* ${email}\n`;
+            }
+            
+            whatsappMessage += `📋 *Sujet:* ${sujet}\n\n`;
+            whatsappMessage += `💬 *Message:*\n${message}\n\n`;
+            whatsappMessage += `⏰ *Envoyé le:* ${new Date().toLocaleString('fr-FR')}\n\n`;
+            whatsappMessage += `🥕 *Merci de nous avoir contactés !*`;
+            
+            // Ouverture de WhatsApp
+            const whatsappUrl = `https://wa.me/221773525382?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Réinitialisation du formulaire
+            document.getElementById('contact-form').reset();
+            showNotification('Message préparé ! WhatsApp va s\'ouvrir.');
+            
+            // Animation du bouton
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '✅ Message envoyé !';
+            submitBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = 'linear-gradient(45deg, #25d366, #128c7e)';
+            }, 3000);
+        });
+
+        // Fonction pour mettre à jour l'affichage du panier
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Animation de défilement fluide pour les liens de navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('cart-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+
+        // Raccourci clavier pour fermer le modal (Escape)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('cart-modal');
+                if (modal.style.display === 'block') {
+                    toggleCart();
+                }
+            }
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            generateProductCards();
+        });
+
+        // Animation au défilement
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les cartes de produits pour l'animation
+        setTimeout(() => {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        }, 100);
+    </script>
+</body>
+</html>
